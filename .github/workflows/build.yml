@@ -26,10 +26,10 @@ jobs:
 
       - name: Build Raspberry Pi OS image
         run: |
-          packer build -var 'raspberry_pi_version=64bit' -var 'bind9_install=true' your-packer-template.json
+          packer build -var 'raspberry_pi_version=64bit' -var 'bind9_install=true' raspbian-with-bind9.json
 
       - name: Archive artifacts
         uses: actions/upload-artifact@v2
         with:
           name: raspbian-image
-          path: path/to/your/output/folder/*.img
+          path: output-arm64/*.img
