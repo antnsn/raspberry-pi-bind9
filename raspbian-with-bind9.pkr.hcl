@@ -23,6 +23,8 @@ source "qemu" "raspberrypi_image" {
 build {
   name = "raspbian-bind9"  
   sources = ["source.qemu.raspberrypi_image"]
+  ssh_username = "pi"
+  ssh_password = "raspberry"
 
   provisioner "shell" {
     inline = [
