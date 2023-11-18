@@ -20,7 +20,7 @@ source "qemu" "raspberrypi_image" {
   iso_checksum      = local.iso_checksum
   ssh_username      = "pi"
   ssh_password      = "raspberry"
-  qemu_binary       = " qemu-kvm"
+  qemu_binary       = " qemu"
 }
 
 build {
