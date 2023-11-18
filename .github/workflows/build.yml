@@ -13,18 +13,27 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Packer build
-        uses: enr0s/packer-qemu-action@v1.0
-        with:
-          templateFile: 'raspbian-with-bind9.pkr.hcl'
-          workingDir: '.'
+      - name: Install Packer
+        run: |
+          curl -fsSL https://releases.hashicorp.com/packer/1.9.4/packer_1.9.4_linux_amd64.zip -o packer.zip
+          sudo unzip -o packer.zip -d /usr/local/bin
+          rm packer.zip
 
-      # - name: Initialize Packer plugins
-      #   run: packer init -upgrade raspbian-with-bind9.pkr.hcl
+      - name: Configure QEMU
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y qemu qemu-user-static
+
+      - name: Set up Packer GitHub API Token
+        run: echo "PACKER_GITHUB_API_TOKEN=${{ secrets.PACKER_GITHUB_API_TOKEN }}" >> $GITHUB_ENV
   
-      # - name: Build Raspberry Pi OS image
-      #   run: |
-      #     packer build raspbian-with-bind9.pkr.hcl
+
+      - name: Initialize Packer plugins
+        run: packer init -upgrade raspbian-with-bind9.pkr.hcl
+  
+      - name: Build Raspberry Pi OS image
+        run: |
+          packer build raspbian-with-bind9.pkr.hcl
 
       - name: Archive artifacts
         uses: actions/upload-artifact@v2
