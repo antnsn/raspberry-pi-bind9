@@ -1,3 +1,13 @@
+
+variable "raspberry_pi_version" {
+    default = "64bit"
+  }
+  
+  variable "bind9_install" {
+    default = true
+  }
+
+
 build {
   name = "raspbian-bind9"  
   source "arm" "raspberry_pi_image" {

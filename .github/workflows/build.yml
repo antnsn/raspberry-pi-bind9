@@ -26,7 +26,7 @@ jobs:
 
       - name: Build Raspberry Pi OS image
         run: |
-          packer build -var-file=variables.pkr.hcl raspbian-with-bind9.pkr.hcl
+          packer build -var 'raspberry_pi_version=64bit' -var 'bind9_install=true' raspbian-with-bind9.pkr.hcl
 
       - name: Archive artifacts
         uses: actions/upload-artifact@v2
