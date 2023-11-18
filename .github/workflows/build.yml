@@ -1,0 +1,35 @@
+name: Build Raspberry Pi OS with BIND9
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Install Packer
+        run: |
+          curl -fsSL https://releases.hashicorp.com/packer/1.7.4/packer_1.7.4_linux_amd64.zip -o packer.zip
+          sudo unzip -o packer.zip -d /usr/local/bin
+          rm packer.zip
+
+      - name: Configure QEMU
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y qemu-user-static
+
+      - name: Build Raspberry Pi OS image
+        run: |
+          packer build -var 'raspberry_pi_version=64bit' -var 'bind9_install=true' your-packer-template.json
+
+      - name: Archive artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: raspbian-image
+          path: path/to/your/output/folder/*.img
