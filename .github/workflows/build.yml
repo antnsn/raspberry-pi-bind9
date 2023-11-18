@@ -22,7 +22,7 @@ jobs:
       - name: Configure QEMU
         run: |
           sudo apt-get update
-          sudo apt-get install -y qemu-user-static
+          sudo apt-get install -y qemu qemu-user-static
 
       - name: Set up Packer GitHub API Token
         run: echo "PACKER_GITHUB_API_TOKEN=${{ secrets.PACKER_GITHUB_API_TOKEN }}" >> $GITHUB_ENV
