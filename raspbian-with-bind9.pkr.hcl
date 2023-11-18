@@ -18,8 +18,8 @@ locals {
 source "qemu" "raspberrypi_image" {
   iso_url           = local.iso_url
   iso_checksum      = local.iso_checksum
-  ssh_username = "pi"
-  ssh_password = "raspberry"
+  ssh_username      = "pi"
+  ssh_password      = "raspberry"
 }
 
 build {
