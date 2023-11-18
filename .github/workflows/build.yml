@@ -15,7 +15,7 @@ jobs:
 
       - name: Install Packer
         run: |
-          curl -fsSL https://releases.hashicorp.com/packer/1.7.4/packer_1.7.4_linux_amd64.zip -o packer.zip
+          curl -fsSL https://releases.hashicorp.com/packer/1.9.4/packer_1.9.4_linux_amd64.zip -o packer.zip
           sudo unzip -o packer.zip -d /usr/local/bin
           rm packer.zip
 
@@ -33,3 +33,5 @@ jobs:
         with:
           name: raspbian-image
           path: output-arm64/*.img
+
+          
