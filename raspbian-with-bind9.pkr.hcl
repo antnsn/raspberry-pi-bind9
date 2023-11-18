@@ -1,3 +1,13 @@
+packer {
+  required_plugins {
+    qemu = {
+      source  = "github.com/hashicorp/qemu"
+      version = "~> 1"
+    }
+  }
+}
+
+
 locals {
   iso_url = "https://downloads.raspberrypi.org/raspios_lite_arm64/images/raspios_lite_arm64-2023-10-10/2023-10-10-raspios-bookworm-arm64-lite.img.xz"
   iso_checksum_type = "sha256"
@@ -14,7 +24,7 @@ source "qemu" "raspberrypi_image" {
 build {
   name = "raspbian-bind9"  
   sources = ["source.qemu.raspberrypi_image"]
-  
+
   provisioner "shell" {
     inline = [
       "sudo apt-get update",

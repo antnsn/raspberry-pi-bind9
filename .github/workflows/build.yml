@@ -24,6 +24,9 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y qemu-user-static
 
+      - name: Initialize Packer plugins
+        run: packer init
+  
       - name: Build Raspberry Pi OS image
         run: |
           packer build raspbian-with-bind9.pkr.hcl
