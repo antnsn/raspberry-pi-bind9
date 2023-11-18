@@ -17,7 +17,6 @@ locals {
 
 source "qemu" "raspberrypi_image" {
   iso_url           = local.iso_url
-  iso_checksum_type = local.iso_checksum_type
   iso_checksum      = local.iso_checksum
 }
 
